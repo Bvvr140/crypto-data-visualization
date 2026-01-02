@@ -10,7 +10,8 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 import Index from '@/pages/Index';
 import TokenDetailsModal from '@/components/TokenDetailsModal';
 import { useTokenById } from '@/hooks/useTokenData';
-import { useAppSelector } from '@/store/hooks';
+import { useAppSelector, useAppDispatch } from '@/store/hooks';
+import { closeModal } from '@/store/slices/uiSlice';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,10 +26,21 @@ const queryClient = new QueryClient({
 
 // Component to handle modal token data
 const ModalProvider: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { modals } = useAppSelector((state) => state.ui);
   const token = useTokenById(modals.tokenDetails.tokenId);
 
-  return <TokenDetailsModal token={token || undefined} />;
+  const handleClose = () => {
+    dispatch(closeModal('tokenDetails'));
+  };
+
+  return (
+    <TokenDetailsModal 
+      token={token || undefined} 
+      isOpen={modals.tokenDetails.open}
+      onClose={handleClose}
+    />
+  );
 };
 
 const EnhancedIndex: React.FC = () => {

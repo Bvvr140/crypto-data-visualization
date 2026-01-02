@@ -49,7 +49,7 @@ const uiSlice = createSlice({
     setQuickBuyAmount: (state, action: PayloadAction<number>) => {
       state.quickBuyAmount = action.payload;
     },
-    openModal: (state, action: PayloadAction<{ modal: keyof UiState['modals']; data?: unknown }>) => {
+    openModal: (state, action: PayloadAction<{ modal: keyof UiState['modals']; data?: { tokenId?: string } }>) => {
       const { modal, data } = action.payload;
       state.modals[modal].open = true;
       if (modal === 'tokenDetails' && data?.tokenId) {
