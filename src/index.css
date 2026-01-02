@@ -1,0 +1,489 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Axiom Trade Dark Theme - Professional Crypto Trading Aesthetic */
+
+@layer base {
+  :root {
+    --background: 220 20% 7%;
+    --foreground: 210 20% 95%;
+
+    --card: 220 18% 10%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 220 20% 12%;
+    --popover-foreground: 210 20% 95%;
+
+    --primary: 171 77% 50%;
+    --primary-foreground: 220 20% 7%;
+
+    --secondary: 220 16% 16%;
+    --secondary-foreground: 210 20% 85%;
+
+    --muted: 220 14% 14%;
+    --muted-foreground: 215 15% 55%;
+
+    --accent: 220 16% 18%;
+    --accent-foreground: 210 20% 95%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 210 20% 95%;
+
+    --success: 145 65% 45%;
+    --success-foreground: 220 20% 7%;
+
+    --warning: 38 92% 50%;
+    --warning-foreground: 220 20% 7%;
+
+    --border: 220 14% 18%;
+    --input: 220 14% 18%;
+    --ring: 171 77% 50%;
+
+    --radius: 0.5rem;
+
+    /* Token-specific colors */
+    --gain: 145 65% 45%;
+    --gain-glow: 145 65% 45%;
+    --loss: 0 72% 55%;
+    --loss-glow: 0 72% 55%;
+    
+    /* Pulse glow effect */
+    --pulse-glow: 171 77% 50%;
+    
+    /* Table colors */
+    --table-header: 220 18% 8%;
+    --table-row-hover: 220 16% 12%;
+    --table-row-active: 220 16% 14%;
+    
+    /* Badge colors */
+    --badge-new: 171 77% 50%;
+    --badge-stretch: 38 92% 50%;
+    --badge-migrated: 265 70% 60%;
+    
+    --sidebar-background: 220 20% 7%;
+    --sidebar-foreground: 210 20% 95%;
+    --sidebar-primary: 171 77% 50%;
+    --sidebar-primary-foreground: 220 20% 7%;
+    --sidebar-accent: 220 16% 16%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 220 14% 18%;
+    --sidebar-ring: 171 77% 50%;
+  }
+
+  .dark {
+    --background: 220 20% 7%;
+    --foreground: 210 20% 95%;
+    --card: 220 18% 10%;
+    --card-foreground: 210 20% 95%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 210 20% 95%;
+    --primary: 171 77% 50%;
+    --primary-foreground: 220 20% 7%;
+    --secondary: 220 16% 16%;
+    --secondary-foreground: 210 20% 85%;
+    --muted: 220 14% 14%;
+    --muted-foreground: 215 15% 55%;
+    --accent: 220 16% 18%;
+    --accent-foreground: 210 20% 95%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 210 20% 95%;
+    --border: 220 14% 18%;
+    --input: 220 14% 18%;
+    --ring: 171 77% 50%;
+    --sidebar-background: 220 20% 7%;
+    --sidebar-foreground: 210 20% 95%;
+    --sidebar-primary: 171 77% 50%;
+    --sidebar-primary-foreground: 220 20% 7%;
+    --sidebar-accent: 220 16% 16%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 220 14% 18%;
+    --sidebar-ring: 171 77% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Shimmer loading effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 0%,
+      hsl(var(--muted) / 0.5) 50%,
+      hsl(var(--muted)) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Price update glow animations */
+  .price-gain {
+    animation: gain-pulse 0.6s ease-out;
+  }
+
+  .price-loss {
+    animation: loss-pulse 0.6s ease-out;
+  }
+
+  @keyframes gain-pulse {
+    0% {
+      background-color: hsl(var(--gain) / 0.3);
+      box-shadow: 0 0 20px hsl(var(--gain) / 0.4);
+    }
+    100% {
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
+
+  @keyframes loss-pulse {
+    0% {
+      background-color: hsl(var(--loss) / 0.3);
+      box-shadow: 0 0 20px hsl(var(--loss) / 0.4);
+    }
+    100% {
+      background-color: transparent;
+      box-shadow: none;
+    }
+  }
+
+  /* Row hover glow */
+  .row-glow {
+    transition: all 0.15s ease-out;
+  }
+
+  .row-glow:hover {
+    background-color: hsl(var(--table-row-hover));
+    box-shadow: inset 0 0 0 1px hsl(var(--primary) / 0.1);
+  }
+
+  /* Pulse animation for live indicators */
+  .live-pulse {
+    animation: live-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes live-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  /* Fade in animation */
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Skeleton pulse */
+  .skeleton-pulse {
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes skeleton-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  /* Number transition */
+  .number-transition {
+    transition: color 0.3s ease-out;
+  }
+
+  /* Smooth color transitions for price changes */
+  .price-transition {
+    transition: color 0.2s ease-out, background-color 0.2s ease-out;
+  }
+
+  /* Hover effects with performance optimization */
+  .hover-lift {
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+    will-change: transform;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.1);
+  }
+
+  /* Button press animation */
+  .button-press {
+    transition: transform 0.1s ease-out;
+  }
+
+  .button-press:active {
+    transform: scale(0.98);
+  }
+
+  /* Loading spinner optimization */
+  .spinner {
+    animation: spin 1s linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Stagger animation for lists */
+  .stagger-item {
+    animation: staggerIn 0.4s ease-out;
+    animation-fill-mode: both;
+  }
+
+  .stagger-item:nth-child(1) { animation-delay: 0ms; }
+  .stagger-item:nth-child(2) { animation-delay: 50ms; }
+  .stagger-item:nth-child(3) { animation-delay: 100ms; }
+  .stagger-item:nth-child(4) { animation-delay: 150ms; }
+  .stagger-item:nth-child(5) { animation-delay: 200ms; }
+  .stagger-item:nth-child(6) { animation-delay: 250ms; }
+  .stagger-item:nth-child(7) { animation-delay: 300ms; }
+  .stagger-item:nth-child(8) { animation-delay: 350ms; }
+
+  @keyframes staggerIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Optimized scrollbar styling */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) hsl(var(--muted));
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  /* Performance optimizations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .contain-layout {
+    contain: layout;
+  }
+
+  .contain-paint {
+    contain: paint;
+  }
+
+  .contain-strict {
+    contain: strict;
+  }
+
+  /* Modal and popover animations */
+  .modal-enter {
+    animation: modalEnter 0.2s ease-out;
+  }
+
+  .modal-exit {
+    animation: modalExit 0.15s ease-in;
+  }
+
+  @keyframes modalEnter {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes modalExit {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95) translateY(-10px);
+    }
+  }
+
+  /* Toast animations */
+  .toast-enter {
+    animation: toastEnter 0.3s ease-out;
+  }
+
+  .toast-exit {
+    animation: toastExit 0.2s ease-in;
+  }
+
+  @keyframes toastEnter {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes toastExit {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+  /* Chart animations */
+  .chart-line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawLine 2s ease-out forwards;
+  }
+
+  @keyframes drawLine {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Glass effect for cards */
+.glass {
+  background: hsl(var(--card) / 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--border) / 0.5);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Chart card styles to match the reference aesthetic */
+.chart-card {
+  padding: 18px 18px 22px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,160,60,0.08);
+  background: linear-gradient(180deg, rgba(22,16,12,0.78), rgba(30,20,12,0.62));
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6) inset, 0 8px 30px rgba(10,6,4,0.24);
+}
+
+.chart-card .text-sm {
+  color: hsl(var(--muted-foreground));
+}
+
+.tf-btn {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  color: hsl(var(--muted-foreground));
+  border: 1px solid rgba(255,255,255,0.03);
+  transition: all 160ms ease;
+}
+
+.tf-btn:hover { transform: translateY(-1px); background: rgba(255,255,255,0.03); }
+.tf-btn.active { background: #704214; color: #ffd87d; border-color: rgba(255,200,80,0.14); box-shadow: 0 4px 10px rgba(255,170,60,0.06) inset; }
+
+.price-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffd166;
+}
+
+.price-change { font-size: 13px; margin-top: 4px; }
+.price-change.positive { color: #34d399; }
+.price-change.negative { color: #fb7185; }
+
+/* Larger chart grid labels and muted x-axis */
+.recharts-cartesian-axis-tick tspan { fill: rgba(255,200,120,0.82); font-size: 11px; }
+
+/* Stat boxes under chart (24h high/low etc.) */
+.chart-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+.stat-box { padding: 12px; border-radius: 8px; background: rgba(0,0,0,0.18); border: 1px solid rgba(255,255,255,0.02); }
+.stat-title { color: rgba(255,255,255,0.7); font-size: 12px; }
+.stat-value { color: #ffd166; font-weight: 700; margin-top: 6px; }
