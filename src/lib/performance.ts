@@ -39,6 +39,7 @@ export const useThrottle = <T extends (...args: unknown[]) => unknown>(
         lastCallRef.current = now;
         return callback(...args);
       }
+      return undefined;
     },
     [callback, delay]
   ) as T;
@@ -116,7 +117,7 @@ export const useLazyImage = (src: string, placeholder?: string) => {
 };
 
 // Bundle size optimization - dynamic imports
-export const loadComponent = (importFn: () => Promise<unknown>) => {
+export const loadComponent = (importFn: () => Promise<{ default: React.ComponentType<any> }>) => {
   return React.lazy(importFn);
 };
 

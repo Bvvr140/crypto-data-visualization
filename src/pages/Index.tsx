@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Token } from '@/store/slices/tokenSlice';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { 
   Zap, 
@@ -245,7 +246,8 @@ const Index = () => {
         };
 
         setCurrentPrice(newPoint.price);
-        setPriceChange(((newPoint.price - prevData[0]?.price) / prevData[0]?.price * 100) || 2.45);
+        const prevPrice = prevData[0]?.price;
+        setPriceChange(prevPrice ? ((newPoint.price - prevPrice) / prevPrice * 100) : 2.45);
 
         return [...prevData.slice(-12), newPoint];
       });
@@ -261,7 +263,7 @@ const Index = () => {
     return num.toString();
   };
 
-  const TokenStocksList = ({ title, tokens, category }: { title: string, tokens: unknown[], category: string }) => (
+  const TokenStocksList = ({ title, tokens, category }: { title: string, tokens: Token[], category: string }) => (
     <Card className="h-full">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
