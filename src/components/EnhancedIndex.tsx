@@ -34,6 +34,7 @@ const ModalProvider: React.FC = () => {
     dispatch(closeModal('tokenDetails'));
   };
 
+  // Fixed: Added proper isOpen and onClose props for deployment
   return (
     <TokenDetailsModal 
       token={token || undefined} 
